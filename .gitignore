@@ -1,173 +1,172 @@
 # Cache, temp and personal files
 
-/.htaccess
+/prestashop/.htaccess
 *.log
 
 # Cache
-/cache/*
-!/cache/.htaccess
-!/cache/cachefs/index.php
-!/cache/deprecated.txt
-!/cache/index.php
-!/cache/purifier/index.php
-!/cache/push/activity
-!/cache/push/index.php
-!/cache/push/trends
-!/cache/sandbox/index.php
-!/cache/smarty/cache/index.php
-!/cache/smarty/compile/index.php
-!/cache/smarty/index.php
-!/cache/tcpdf/index.php
+/prestashop/cache/*
+!/prestashop/cache/.htaccess
+!/prestashop/cache/cachefs/index.php
+!/prestashop/cache/deprecated.txt
+!/prestashop/cache/index.php
+!/prestashop/cache/purifier/index.php
+!/prestashop/cache/push/activity
+!/prestashop/cache/push/index.php
+!/prestashop/cache/push/trends
+!/prestashop/cache/sandbox/index.php
+!/prestashop/cache/smarty/cache/index.php
+!/prestashop/cache/smarty/compile/index.php
+!/prestashop/cache/smarty/index.php
+!/prestashop/cache/tcpdf/index.php
 
 # Download
-/download/*
-!/download/.htaccess
-!/download/index.php
+/prestashop/download/*
+!/prestashop/download/.htaccess
+!/prestashop/download/index.php
 
 # Images
-/img/*
-!/img/.htaccess
-!/img/index.php
-!/img/404.gif
-!/img/bg_500.png
-!/img/bg_loader.png
-!/img/favicon.ico
-!/img/loader.gif
-!/img/loadingAnimation.gif
-!/img/logo.jpg
-!/img/logo.png
-!/img/logo_invoice.jpg
-!/img/logo_stores.png
-!/img/macFFBgHack.png
-!/img/prestashop-avatar.png
-!/img/prestashop@2x.png
-!/img/preston-login-wink@2x.png
-!/img/preston-login@2x.png
-!/img/questionmark.png
-!/img/genders/index.php
-!/img/admin/index.php
-!/img/c/index.php
-!/img/cms/index.php
-!/img/co/index.php
-!/img/jquery-ui
-!/img/l/index.php
-!/img/m/index.php
-!/img/os/index.php
-!/img/p/index.php
-!/img/s/index.php
-!/img/scenes
-!/img/st/index.php
-!/img/su/index.php
-!/img/t/index.php
-!/img/tmp/index.php
+/prestashop/img/*
+!/prestashop/img/.htaccess
+!/prestashop/img/index.php
+!/prestashop/img/404.gif
+!/prestashop/img/bg_500.png
+!/prestashop/img/bg_loader.png
+!/prestashop/img/favicon.ico
+!/prestashop/img/loader.gif
+!/prestashop/img/loadingAnimation.gif
+!/prestashop/img/logo.jpg
+!/prestashop/img/logo.png
+!/prestashop/img/logo_invoice.jpg
+!/prestashop/img/logo_stores.png
+!/prestashop/img/macFFBgHack.png
+!/prestashop/img/prestashop-avatar.png
+!/prestashop/img/prestashop@2x.png
+!/prestashop/img/preston-login-wink@2x.png
+!/prestashop/img/preston-login@2x.png
+!/prestashop/img/questionmark.png
+!/prestashop/img/genders/index.php
+!/prestashop/img/admin/index.php
+!/prestashop/img/c/index.php
+!/prestashop/img/cms/index.php
+!/prestashop/img/co/index.php
+!/prestashop/img/jquery-ui
+!/prestashop/img/l/index.php
+!/prestashop/img/m/index.php
+!/prestashop/img/os/index.php
+!/prestashop/img/p/index.php
+!/prestashop/img/s/index.php
+!/prestashop/img/scenes
+!/prestashop/img/st/index.php
+!/prestashop/img/su/index.php
+!/prestashop/img/t/index.php
+!/prestashop/img/tmp/index.php
 
 # Upload
-/upload/*
-!/upload/.htaccess
+/prestashop/upload/*
+!/prestashop/upload/.htaccess
 
-/vendor/*
-/docs/phpdoc-sf/
-/composer.lock
+/prestashop/vendor/*
+/prestashop/docs/phpdoc-sf/
+/prestashop/composer.lock
 *.hot-update.js
 *.hot-update.json
 
+/prestashop/admin-dev/autoupgrade/*
+!/prestashop/admin-dev/autoupgrade/index.php
+!/prestashop/admin-dev/autoupgrade/backup/index.php
 
-/admin-dev/autoupgrade/*
-!/admin-dev/autoupgrade/index.php
-!/admin-dev/autoupgrade/backup/index.php
+/prestashop/admin-dev/backups/*
+!/prestashop/admin-dev/backups/.htaccess
 
-/admin-dev/backups/*
-!/admin-dev/backups/.htaccess
+/prestashop/admin-dev/import/*
+!/prestashop/admin-dev/import/.htaccess
+!/prestashop/admin-dev/import/index.php
 
-/admin-dev/import/*
-!/admin-dev/import/.htaccess
-!/admin-dev/import/index.php
-
-/admin-dev/export/*
-!/admin-dev/export/.htaccess
-!/admin-dev/export/index.php
+/prestashop/admin-dev/export/*
+!/prestashop/admin-dev/export/.htaccess
+!/prestashop/admin-dev/export/index.php
 
 # Downloaded RTL files
-/admin-dev/themes/default/css/bundle/default_rtl.css
-/admin-dev/themes/default/css/bundle/shared_rtl.css
-/admin-dev/themes/default/css/font_rtl.css
-/admin-dev/themes/default/css/overrides_rtl.css
-/admin-dev/themes/default/css/vendor/font-awesome/font-awesome_rtl.css
-/admin-dev/themes/default/css/vendor/nv.d3_rtl.css
-/admin-dev/themes/default/css/vendor/titatoggle-min_rtl.css
-/admin-dev/themes/default/public/theme_rtl.css
-/admin-dev/themes/new-theme/css/module/drop_rtl.css
-/admin-dev/themes/new-theme/css/right-sidebar_rtl.css
+/prestashop/admin-dev/themes/default/css/bundle/default_rtl.css
+/prestashop/admin-dev/themes/default/css/bundle/shared_rtl.css
+/prestashop/admin-dev/themes/default/css/font_rtl.css
+/prestashop/admin-dev/themes/default/css/overrides_rtl.css
+/prestashop/admin-dev/themes/default/css/vendor/font-awesome/font-awesome_rtl.css
+/prestashop/admin-dev/themes/default/css/vendor/nv.d3_rtl.css
+/prestashop/admin-dev/themes/default/css/vendor/titatoggle-min_rtl.css
+/prestashop/admin-dev/themes/default/public/theme_rtl.css
+/prestashop/admin-dev/themes/new-theme/css/module/drop_rtl.css
+/prestashop/admin-dev/themes/new-theme/css/right-sidebar_rtl.css
 
-themes/*/cache/*
+/prestashop/themes/*/cache/*
 
 # Config
-
-config/settings.inc.php
-config/settings.old.php
-config/xml/*
-config/themes/*
-!config/xml/themes/default.xml
-themes/*/config/settings_*.json
-app/config/parameters.old.yml
-app/config/config.php
+/prestashop/config/settings.inc.php
+/prestashop/config/settings.old.php
+/prestashop/config/xml/*
+/prestashop/config/themes/*
+!/prestashop/config/xml/themes/default.xml
+/prestashop/themes/*/config/settings_*.json
+/prestashop/app/config/parameters.old.yml
+/prestashop/app/config/config.php
 
 # Themes, modules and overrides
-
-modules/*
-override/*
-themes/*/
-!themes/classic
-!themes/_core
-!themes/_libraries
+/prestashop/modules/*
+/prestashop/override/*
+/prestashop/themes/*/
+!/prestashop/themes/classic
+!/prestashop/themes/_core
+!/prestashop/themes/_libraries
 
 # Vendors and dependencies
-
-bower_components/
-node_modules/
-composer.phar
-php-cs-fixer
-.grunt/*
+/prestashop/bower_components/
+/prestashop/node_modules/
+/prestashop/composer.phar
+/prestashop/php-cs-fixer
+/prestashop/.grunt/*
 
 # Translations and emails templates
-
-translations/*
-mails/*
-!mails/themes/
-!mails/_partials/
-themes/default-bootstrap/lang/*
-themes/default-bootstrap/modules/*/translations/*.php
-themes/default-bootstrap/mails/*
-!themes/default-bootstrap/mails/en/
-themes/default-bootstrap/modules/*/mails/*
-!themes/default-bootstrap/modules/*/mails/en
+/prestashop/translations/*
+/prestashop/mails/*
+!/prestashop/mails/themes/
+!/prestashop/mails/_partials/
+/prestashop/themes/default-bootstrap/lang/*
+/prestashop/themes/default-bootstrap/modules/*/translations/*.php
+/prestashop/themes/default-bootstrap/mails/*
+!/prestashop/themes/default-bootstrap/mails/en/
+/prestashop/themes/default-bootstrap/modules/*/mails/*
+!/prestashop/themes/default-bootstrap/modules/*/mails/en
 
 # MISC
-
-*sitemap.xml
-/robots.txt
+/prestashop/*sitemap.xml
+/prestashop/robots.txt
 
 # Symfony
+/prestashop/bin/
+/prestashop/app/Resources/geoip/GeoLite2-City.mmdb
+/prestashop/app/Resources/translations/*
+!/prestashop/app/Resources/translations/default
+/prestashop/app/config/parameters.yml
+/prestashop/app/config/parameters.php
+/prestashop/build/
+/prestashop/phpunit.xml
+/prestashop/var/*
+!/prestashop/var/cache
+/prestashop/var/cache/*
+!/prestashop/var/cache/.gitkeep
+!/prestashop/var/logs
+/prestashop/var/logs/*
+!/prestashop/var/logs/.gitkeep
+!/prestashop/var/sessions
+/prestashop/var/sessions/*
+!/prestashop/var/sessions/.gitkeep
+!/prestashop/var/SymfonyRequirements.php
+/prestashop/vendor/
+/prestashop/web/bundles/
 
-/bin/
-/app/Resources/geoip/GeoLite2-City.mmdb
-/app/Resources/translations/*
-!/app/Resources/translations/default
-/app/config/parameters.yml
-/app/config/parameters.php
-/build/
-/phpunit.xml
-/var/*
-!/var/cache
-/var/cache/*
-!var/cache/.gitkeep
-!/var/logs
-/var/logs/*
-!var/logs/.gitkeep
-!/var/sessions
-/var/sessions/*
-!var/sessions/.gitkeep
-!var/SymfonyRequirements.php
-/vendor/
-/web/bundles/
+# Environment
+.env
 
+# VS Code
+*.code-workspace
+.vscode/
