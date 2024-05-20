@@ -1,0 +1,80 @@
+version: '3'
+services:
+  # Database
+  mysql:
+    container_name: prestashop-mysql
+    image: mysql:5.7
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+      MYSQL_DATABASE: $MYSQL_DATABASE
+      MYSQL_USER: $MYSQL_USER
+      MYSQL_PASSWORD: $MYSQL_PASSWORD
+    networks:
+      - prestashop_network
+    volumes:
+      - ./mysql:/var/lib/mysql
+  # PHPMyAdmin
+  phpmyadmin:
+    container_name: prestashop-phpmyadmin
+    image: phpmyadmin/phpmyadmin
+    links:
+      - prestashop-mysql
+    environment:
+      PMA_HOST: prestashop-mysql
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+      MYSQL_USER: $MYSQL_USER
+      MYSQL_PASSWORD: $MYSQL_PASSWORD
+    restart: unless-stopped
+    ports:
+      - 8081:80
+  # Prestashop
+  prestashop:
+    container_name: prestashop
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    restart: unless-stopped
+    depends_on:
+      - mysql
+    ports:
+      - 8080:80
+    env_file: .env
+    environment:
+      PS_DEV_MODE: $PS_DEV_MODE
+      PS_HOST_MODE: $PS_HOST_MODE
+      PS_DEMO_MODE: $PS_DEMO_MODE
+      DB_SERVER: prestashop-mysql
+      DB_USER: $MYSQL_USER
+      DB_PASSWD: $MYSQL_PASSWORD
+      DB_PREFIX: $DB_PREFIX
+      DB_NAME: $MYSQL_DATABASE
+      PS_INSTALL_AUTO: $PS_INSTALL_AUTO
+      PS_ERASE_DB: $PS_ERASE_DB
+      PS_INSTALL_DB: $PS_INSTALL_DB
+      PS_LANGUAGE: $PS_LANGUAGE
+      PS_COUNTRY: $PS_COUNTRY
+      PS_ALL_LANGUAGES: $PS_ALL_LANGUAGES
+      PS_FOLDER_ADMIN: $PS_FOLDER_ADMIN
+      PS_FOLDER_INSTALL: $PS_FOLDER_INSTALL
+      PS_ENABLE_SSL: $PS_ENABLE_SSL
+      ADMIN_MAIL: $ADMIN_MAIL
+      ADMIN_PASSWD: $ADMIN_PASSWD
+    networks:
+      - prestashop_network
+    volumes:
+      - ./prestashop:/var/www/html
+      #- type: bind
+      #  source: ./modules/testModule # local path to the module
+      #  target: /var/www/html/modules/testModule # path to be mounted in the container
+      #- type: bind
+      #  source: ./themes/myTheme # local path to the theme
+      #  target: /var/www/html/themes/myTheme # path to be mounted in the container
+networks:
+  prestashop_network:
+volumes:
+  mysql:
+  psdata:
