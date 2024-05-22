@@ -4,6 +4,8 @@ services:
   mysql:
     image: mysql:5.7
     restart: unless-stopped
+    volumes:
+      - ./mysql:/var/lib/mysql
     env_file: .env
     environment:
       MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
@@ -12,13 +14,14 @@ services:
       MYSQL_PASSWORD: $MYSQL_PASSWORD
     networks:
       - prestashop_network
-    volumes:
-      - ./mysql:/var/lib/mysql
   # PHPMyAdmin
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     links:
       - mysql
+    ports:
+      - 8080:80
+    restart: unless-stopped
     environment:
       PMA_HOST: mysql
       PMA_PORT: 3306
@@ -26,9 +29,8 @@ services:
       MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
       MYSQL_USER: $MYSQL_USER
       MYSQL_PASSWORD: $MYSQL_PASSWORD
-    restart: unless-stopped
-    ports:
-      - 8081:80
+    networks:
+      - prestashop_network
   # Prestashop
   prestashop:
     build:
@@ -38,7 +40,15 @@ services:
     depends_on:
       - mysql
     ports:
-      - 8080:80
+      - 8000:80
+    volumes:
+      - ./prestashop:/var/www/html
+      #- type: bind
+      #  source: ./modules/testModule # local path to the module
+      #  target: /var/www/html/modules/testModule # path to be mounted in the container
+      #- type: bind
+      #  source: ./themes/myTheme # local path to the theme
+      #  target: /var/www/html/themes/myTheme # path to be mounted in the container
     env_file: .env
     environment:
       PS_DEV_MODE: $PS_DEV_MODE
@@ -62,14 +72,6 @@ services:
       ADMIN_PASSWD: $ADMIN_PASSWD
     networks:
       - prestashop_network
-    volumes:
-      - ./prestashop:/var/www/html
-      #- type: bind
-      #  source: ./modules/testModule # local path to the module
-      #  target: /var/www/html/modules/testModule # path to be mounted in the container
-      #- type: bind
-      #  source: ./themes/myTheme # local path to the theme
-      #  target: /var/www/html/themes/myTheme # path to be mounted in the container
 networks:
   prestashop_network:
 volumes:
