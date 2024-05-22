@@ -10,6 +10,9 @@ FROM prestashop/prestashop:latest
 # FROM prestashop/prestashop:8.0.4-8.1-apache
 # FROM prestashop/prestashop:8.0.4-8.1-fpm
 
+# Add ServerName
+RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
+
 # INSTALL PHP EXTENSIONS
 RUN docker-php-ext-install mysqli pdo pdo_mysql
 
