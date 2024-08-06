@@ -3,7 +3,7 @@ services:
   # Database
   mysql:
     image: mysql:5.7
-    restart: unless-stopped
+    restart: always
     volumes:
       - ./mysql:/var/lib/mysql
     env_file: .env
@@ -21,7 +21,7 @@ services:
       - mysql
     ports:
       - 8080:80
-    restart: unless-stopped
+    restart: always
     environment:
       PMA_HOST: mysql
       PMA_PORT: 3306
@@ -36,7 +36,7 @@ services:
     build:
       context: ./
       dockerfile: ./Dockerfile
-    restart: unless-stopped
+    restart: always
     depends_on:
       - mysql
     ports:
@@ -44,6 +44,7 @@ services:
     working_dir: /var/www/html
     volumes:
       - ./prestashop:/var/www/html
+      - ./logs:/var/www/html/var/logs
       #- type: bind
       #  source: ./modules/testModule # local path to the module
       #  target: /var/www/html/modules/testModule # path to be mounted in the container
@@ -61,6 +62,7 @@ services:
       DB_PREFIX: $DB_PREFIX
       DB_NAME: $MYSQL_DATABASE
       PS_INSTALL_AUTO: $PS_INSTALL_AUTO
+      PS_DOMAIN: $PS_DOMAIN
       PS_ERASE_DB: $PS_ERASE_DB
       PS_INSTALL_DB: $PS_INSTALL_DB
       PS_LANGUAGE: $PS_LANGUAGE
