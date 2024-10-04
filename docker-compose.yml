@@ -92,3 +92,5 @@ networks:
 volumes:
   mysql:
   prestashop:
+  logs:
+  phpmyadmin:
