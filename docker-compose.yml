@@ -1,27 +1,39 @@
-version: '3'
+version: "3.9"
 services:
   # Database
   mysql:
-    image: mysql:5.7
-    restart: always
+    image: mysql:latest
     volumes:
       - ./mysql:/var/lib/mysql
+    restart: always
     env_file: .env
     environment:
       MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
       MYSQL_DATABASE: $MYSQL_DATABASE
       MYSQL_USER: $MYSQL_USER
       MYSQL_PASSWORD: $MYSQL_PASSWORD
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-u", "root", "-p", "user_password"]
+      interval: 1m
+      timeout: 10s
+      retries: 3
     networks:
       - prestashop_network
   # PHPMyAdmin
   phpmyadmin:
-    image: phpmyadmin/phpmyadmin
+    depends_on:
+      - mysql
+    build:
+      context: ./build/phpmyadmin
+      dockerfile: Dockerfile
+    volumes:
+      - ./phpmyadmin/themes:/var/www/html/themes
     links:
       - mysql
+    restart: always
     ports:
       - 8080:80
-    restart: always
+    env_file: .env
     environment:
       PMA_HOST: mysql
       PMA_PORT: 3306
@@ -33,14 +45,14 @@ services:
       - prestashop_network
   # Prestashop
   prestashop:
-    build:
-      context: ./
-      dockerfile: ./Dockerfile
-    restart: always
     depends_on:
       - mysql
+    build:
+      context: ./build/prestashop
+      dockerfile: ./Dockerfile
     ports:
       - 8000:80
+    restart: always
     working_dir: /var/www/html
     volumes:
       - ./prestashop:/var/www/html
