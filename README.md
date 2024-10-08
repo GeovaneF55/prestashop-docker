@@ -8,12 +8,12 @@ Easily set up and managed local Prestashop development with Docker, using MySQL 
 2. Clone this repository.
 3. Create a `.env` file by copying `.env-sample`:
 ```bash
-cp .env-sample .env`
+cp .env-sample .env
 ```
 4. Configure the required values in `.env`. These values will be used to set up MySQL and initialize the Prestashop database.
 5. Run the following command inside the project directory:  
 ```bash
-`docker-compose up -d`
+docker-compose up -d
 ```
 6. Access the Prestashop installation by navigating to [http://localhost:8000](http://localhost:8000) in your browser.
 7. Complete the Prestashop installation process.
