@@ -2,8 +2,6 @@ services:
   # Database
   mysql:
     image: mysql:latest
-    volumes:
-      - ./mysql:/var/lib/mysql
     restart: always
     env_file: .env
     environment:
@@ -11,13 +9,16 @@ services:
       MYSQL_DATABASE: $MYSQL_DATABASE
       MYSQL_USER: $MYSQL_USER
       MYSQL_PASSWORD: $MYSQL_PASSWORD
+    volumes:
+      - mysql_data:/var/lib/mysql  # Use named volume
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-u", "root", "-p", "user_password"]
+      test: ["CMD", "mysqladmin", "ping", "-u", "root", "-p$MYSQL_ROOT_PASSWORD"]
       interval: 1m
       timeout: 10s
       retries: 3
     networks:
       - prestashop_network
+
   # PHPMyAdmin
   phpmyadmin:
     depends_on:
@@ -25,10 +26,6 @@ services:
     build:
       context: ./build/phpmyadmin
       dockerfile: Dockerfile
-    volumes:
-      - ./phpmyadmin/themes:/var/www/html/themes
-    links:
-      - mysql
     restart: always
     ports:
       - 8080:80
@@ -38,40 +35,31 @@ services:
       PMA_PORT: 3306
       PMA_ARBITRARY: 1
       MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
-      MYSQL_USER: $MYSQL_USER
-      MYSQL_PASSWORD: $MYSQL_PASSWORD
+    volumes:
+      - ./phpmyadmin/themes:/var/www/html/themes  # Mount themes for customization
     networks:
       - prestashop_network
+
   # Prestashop
   prestashop:
     depends_on:
       - mysql
     build:
       context: ./build/prestashop
-      dockerfile: ./Dockerfile
+      dockerfile: Dockerfile
+    restart: always
     ports:
       - 8000:80
-    restart: always
-    working_dir: /var/www/html
-    volumes:
-      - ./prestashop:/var/www/html
-      - ./logs:/var/www/html/var/logs
-      #- type: bind
-      #  source: ./modules/testModule # local path to the module
-      #  target: /var/www/html/modules/testModule # path to be mounted in the container
-      #- type: bind
-      #  source: ./themes/myTheme # local path to the theme
-      #  target: /var/www/html/themes/myTheme # path to be mounted in the container
     env_file: .env
     environment:
-      PS_DEV_MODE: $PS_DEV_MODE
-      PS_HOST_MODE: $PS_HOST_MODE
-      PS_DEMO_MODE: $PS_DEMO_MODE
       DB_SERVER: mysql
       DB_USER: $MYSQL_USER
       DB_PASSWD: $MYSQL_PASSWORD
       DB_PREFIX: $DB_PREFIX
       DB_NAME: $MYSQL_DATABASE
+      PS_DEV_MODE: $PS_DEV_MODE
+      PS_HOST_MODE: $PS_HOST_MODE
+      PS_DEMO_MODE: $PS_DEMO_MODE
       PS_INSTALL_AUTO: $PS_INSTALL_AUTO
       PS_DOMAIN: $PS_DOMAIN
       PS_ERASE_DB: $PS_ERASE_DB
@@ -84,12 +72,20 @@ services:
       PS_ENABLE_SSL: $PS_ENABLE_SSL
       ADMIN_MAIL: $ADMIN_MAIL
       ADMIN_PASSWD: $ADMIN_PASSWD
+    working_dir: /var/www/html
+    volumes:
+      - prestashop_data:/var/www/html          # Main Prestashop files
+      - logs:/var/www/html/var/logs            # Log files
+      # Uncomment below for custom modules and themes
+      #- ./modules/testModule:/var/www/html/modules/testModule
+      #- ./themes/myTheme:/var/www/html/themes/myTheme
     networks:
       - prestashop_network
+
 networks:
   prestashop_network:
+
 volumes:
-  mysql:
-  prestashop:
-  logs:
-  phpmyadmin:
+  mysql_data:            # MySQL data storage
+  prestashop_data:       # Prestashop data storage
+  logs:                  # Log data
