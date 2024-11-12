@@ -10,7 +10,7 @@ services:
       MYSQL_USER: $MYSQL_USER
       MYSQL_PASSWORD: $MYSQL_PASSWORD
     volumes:
-      - mysql_data:/var/lib/mysql  # Use named volume
+      - ./mysql_data:/var/lib/mysql  # Use named volume
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-u", "root", "-p$MYSQL_ROOT_PASSWORD"]
       interval: 1m
@@ -74,8 +74,8 @@ services:
       ADMIN_PASSWD: $ADMIN_PASSWD
     working_dir: /var/www/html
     volumes:
-      - prestashop_data:/var/www/html          # Main Prestashop files
-      - logs:/var/www/html/var/logs            # Log files
+      - ./prestashop_data:/var/www/html        # Main Prestashop files
+      - ./logs:/var/www/html/var/logs          # Log files
       # Uncomment below for custom modules and themes
       #- ./modules/testModule:/var/www/html/modules/testModule
       #- ./themes/myTheme:/var/www/html/themes/myTheme
