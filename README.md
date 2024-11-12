@@ -72,5 +72,5 @@ docker compose down
 docker system prune -a
 
 # WARNING: Be cautious when working with other projects like WordPress
-sudo rm -R mysql/ prestashop/ logs/ phpmyadmin/
+sudo rm -R mysql_data/ prestashop_data/ logs/ phpmyadmin/
 ```
