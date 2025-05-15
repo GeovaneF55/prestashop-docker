@@ -10,7 +10,7 @@ services:
       MYSQL_USER: $MYSQL_USER
       MYSQL_PASSWORD: $MYSQL_PASSWORD
     volumes:
-      - ./mysql_data:/var/lib/mysql  # Use named volume
+      - mysql_data:/var/lib/mysql  # Use named volume
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-u", "root", "-p$MYSQL_ROOT_PASSWORD"]
       interval: 1m
@@ -23,9 +23,7 @@ services:
   phpmyadmin:
     depends_on:
       - mysql
-    build:
-      context: ./build/phpmyadmin
-      dockerfile: Dockerfile
+    image: phpmyadmin/phpmyadmin:latest
     restart: always
     ports:
       - 8080:80
@@ -35,8 +33,6 @@ services:
       PMA_PORT: 3306
       PMA_ARBITRARY: 1
       MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
-    volumes:
-      - ./phpmyadmin/themes:/var/www/html/themes  # Mount themes for customization
     networks:
       - prestashop_network
 
@@ -74,8 +70,8 @@ services:
       ADMIN_PASSWD: $ADMIN_PASSWD
     working_dir: /var/www/html
     volumes:
-      - ./prestashop_data:/var/www/html        # Main Prestashop files
-      - ./logs:/var/www/html/var/logs          # Log files
+      - ./prestashop_data:/var/www/html          # Main Prestashop files
+      - ./logs:/var/www/html/var/logs            # Log files
       # Uncomment below for custom modules and themes
       #- ./modules/testModule:/var/www/html/modules/testModule
       #- ./themes/myTheme:/var/www/html/themes/myTheme
